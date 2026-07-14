@@ -1,0 +1,137 @@
+const App = {
+    init() {
+        this.load();
+        
+        // Add form submit
+        document.getElementById('studentForm').onsubmit = (e) => {
+            e.preventDefault();
+            this.save();
+        };
+        
+        // Search
+        document.getElementById('search').oninput = (e) => {
+            this.search(e.target.value);
+        };
+        
+        // Toggle sidebar
+        document.querySelector('.toggle').onclick = () => {
+            document.querySelector('.side').classList.toggle('open');
+        };
+        
+        // Back button
+        document.getElementById('backBtn').onclick = (e) => {
+            e.preventDefault();
+            if (confirm('Go back to previous page?')) {
+                window.history.back();
+            }
+        };
+    },
+
+    load() {
+        const data = Storage.get();
+        UI.render(data);
+        UI.stats(data);
+        
+        // Reset form
+        document.getElementById('studentForm').reset();
+        const btn = document.querySelector('.submit-btn');
+        btn.innerHTML = '<i class="fas fa-save"></i> Add Student';
+        delete btn.dataset.editId;
+        
+        // Clear error styles
+        document.getElementById('studentNumber').style.borderColor = '';
+        document.getElementById('rollNumber').style.borderColor = '';
+    },
+
+    search(q) {
+        const data = Storage.get();
+        const filtered = q.trim() ? data.filter(s => 
+            s.name.toLowerCase().includes(q.toLowerCase()) ||
+            s.email.toLowerCase().includes(q.toLowerCase()) ||
+            s.course.toLowerCase().includes(q.toLowerCase()) ||
+            (s.studentNumber && s.studentNumber.includes(q)) ||
+            (s.rollNumber && s.rollNumber.includes(q))
+        ) : data;
+        UI.render(filtered);
+        UI.stats(filtered);
+    },
+
+    save() {
+        const editId = document.querySelector('.submit-btn').dataset.editId;
+        const data = {
+            name: document.getElementById('name').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            course: document.getElementById('course').value,
+            studentNumber: document.getElementById('studentNumber').value.trim(),
+            rollNumber: document.getElementById('rollNumber').value.trim(),
+            grade: document.getElementById('grade').value,
+            status: document.getElementById('status').value
+        };
+        
+        // Validation
+        if (!data.name || !data.email || !data.studentNumber || !data.rollNumber || !data.grade) {
+            alert('Please fill all required fields!');
+            return;
+        }
+
+        // Student number validation - exactly 10 digits
+        if (data.studentNumber.length !== 10) {
+            alert('❌ Student number must be exactly 10 digits!\n\nExample: 2024000001');
+            document.getElementById('studentNumber').focus();
+            document.getElementById('studentNumber').style.borderColor = '#d9534f';
+            return;
+        }
+
+        // Check if it's all numbers (no letters)
+        if (!/^\d+$/.test(data.studentNumber)) {
+            alert('❌ Student number must contain only digits (0-9)!');
+            document.getElementById('studentNumber').focus();
+            document.getElementById('studentNumber').style.borderColor = '#d9534f';
+            return;
+        }
+
+        // Roll number validation - should not be empty
+        if (!data.rollNumber) {
+            alert('❌ Please enter a roll number!');
+            document.getElementById('rollNumber').focus();
+            document.getElementById('rollNumber').style.borderColor = '#d9534f';
+            return;
+        }
+
+        // Check if student number already exists (only for new students)
+        if (!editId) {
+            const allStudents = Storage.get();
+            const exists = allStudents.some(s => s.studentNumber === data.studentNumber);
+            if (exists) {
+                alert('❌ This student number already exists!\nPlease use a unique number.');
+                document.getElementById('studentNumber').focus();
+                document.getElementById('studentNumber').style.borderColor = '#d9534f';
+                return;
+            }
+
+            // Check if roll number already exists
+            const rollExists = allStudents.some(s => s.rollNumber === data.rollNumber);
+            if (rollExists) {
+                alert('❌ This roll number already exists!\nPlease use a unique roll number.');
+                document.getElementById('rollNumber').focus();
+                document.getElementById('rollNumber').style.borderColor = '#d9534f';
+                return;
+            }
+        }
+        
+        if (editId) {
+            Storage.update(editId, data);
+        } else {
+            Storage.add(data);
+        }
+        
+        this.load();
+        
+        // Scroll to last added
+        setTimeout(() => {
+            document.querySelector('.last-added').scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+    }
+};
+
+document.addEventListener('DOMContentLoaded', () => App.init());
