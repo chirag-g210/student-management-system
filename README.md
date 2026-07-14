@@ -124,8 +124,8 @@ This project is licensed under the **MIT License** — feel free to use, modify,
 
 **Chirag Gupta**
 
-- GitHub: [@chirag-gupta](https://github.com/chirag-g210)
-- LinkedIn: [Chirag Gupta](https://linkedin.com/in/chirag-g210)
+- GitHub: [@chirag-g210](https://github.com/chirag-g210)
+- LinkedIn: [Chirag-g210](https://linkedin.com/in/chirag-g210)
 
 ---
 
