@@ -38,13 +38,13 @@ A modern, lightweight, and fully responsive Student Management System built with
 ## 📸 Screenshots
 
 ### Light Theme
-![alt text](/student-management-system/assets/image.png)
+![alt text](assets/image.png)
 
 ### Dark Theme
-![alt text](/student-management-system/assets/image2.png)
+![alt text](assets/image2.png)
 
 ### Landingpage Overview
-![alt text](/student-management-system/assets/image3.png)
+![alt text](assets/image3.png)
 
 ---
 
