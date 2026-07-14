@@ -1,0 +1,48 @@
+# =====================================
+# Bas kaam ki cheezein - extra nahi
+# =====================================
+
+# OS ki bakwas
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor ki setting (tumhari personal)
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files - kisi kaam ki nahi
+*.log
+*.tmp
+*.bak
+*.cache
+*.temp
+
+# Backup files (accidental save se bachao)
+*.backup
+*.old
+
+# Agar data localStorage se file mein save karte ho
+*.json
+*.db
+*.sqlite
+students-data.json
+
+# Agar kabhi sensitive info use karo
+.env
+*.pem
+*.key
+*.crt
+secrets/
+credentials/
+
+# Build files (agar kabhi banao)
+dist/
+build/
+out/
+*.zip
+*.rar
+*.gz

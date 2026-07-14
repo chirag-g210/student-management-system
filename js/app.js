@@ -1,6 +1,7 @@
 const App = {
     init() {
         this.load();
+        this.initTheme();
         
         // Add form submit
         document.getElementById('studentForm').onsubmit = (e) => {
@@ -33,7 +34,7 @@ const App = {
             };
         });
 
-        // ===== SEARCH BY ROLL NUMBER =====
+        // Search by Roll Number
         document.getElementById('rollSearchBtn').onclick = () => {
             this.searchByRollNumber();
         };
@@ -43,6 +44,47 @@ const App = {
                 this.searchByRollNumber();
             }
         };
+
+        // ===== THEME TOGGLE =====
+        const toggle = document.getElementById('themeToggle');
+        toggle.onclick = () => {
+            this.toggleTheme();
+        };
+    },
+
+    // ===== THEME FUNCTIONS =====
+    initTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        const toggle = document.getElementById('themeToggle');
+        const icon = toggle?.querySelector('.slider i');
+        
+        if (savedTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            toggle?.classList.add('active');
+            if (icon) icon.className = 'fas fa-sun';
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+            toggle?.classList.remove('active');
+            if (icon) icon.className = 'fas fa-moon';
+        }
+    },
+
+    toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const toggle = document.getElementById('themeToggle');
+        const icon = toggle?.querySelector('.slider i');
+        
+        if (currentTheme === 'dark') {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+            toggle?.classList.remove('active');
+            if (icon) icon.className = 'fas fa-moon';
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            toggle?.classList.add('active');
+            if (icon) icon.className = 'fas fa-sun';
+        }
     },
 
     load() {
@@ -78,13 +120,11 @@ const App = {
         UI.stats(filtered);
     },
 
-    // ===== SEARCH BY ROLL NUMBER =====
     searchByRollNumber() {
         const rollInput = document.getElementById('rollSearchInput');
         const resultDiv = document.getElementById('rollSearchResult');
         const rollNumber = rollInput.value.trim();
 
-        // Validation - empty input
         if (!rollNumber) {
             resultDiv.innerHTML = `
                 <div class="validation-msg">
@@ -94,12 +134,10 @@ const App = {
             return;
         }
 
-        // Search in localStorage
         const students = Storage.get();
         const student = students.find(s => s.rollNumber === rollNumber);
 
         if (student) {
-            // Student found - display result card
             resultDiv.innerHTML = `
                 <div class="search-result">
                     <div class="result-card">
@@ -135,7 +173,6 @@ const App = {
                 </div>
             `;
         } else {
-            // No student found
             resultDiv.innerHTML = `
                 <div class="search-result">
                     <div class="no-result">

@@ -42,6 +42,18 @@
                     <input type="text" id="search" placeholder="Search..." />
                 </div>
                 <div class="user">
+                    <!-- Theme Toggle Switch -->
+                    <div class="theme-toggle-wrapper">
+                        <div class="toggle-switch" id="themeToggle" role="button" tabindex="0" aria-label="Toggle theme">
+                            <div class="slider">
+                                <i class="fas fa-moon"></i>
+                            </div>
+                        </div>
+                        <span class="toggle-label">
+                            <span class="light-label">☀️</span>
+                            <span class="dark-label">🌙</span>
+                        </span>
+                    </div>
                     <i class="fas fa-bell"></i>
                     <span class="avtar">AD</span>
                 </div>
@@ -86,7 +98,7 @@
             <div class="badges" id="courseStats"></div>
         </div>
 
-        <!-- ===== ADD STUDENT FORM ===== -->
+        <!-- Add Student Form -->
         <div class="form-section">
             <h3><i class="fas fa-user-plus"></i> Add New Student</h3>
             <form id="studentForm" class="student-form">
@@ -115,7 +127,7 @@
                     <div class="group">
                         <label>Student Number <span>*</span></label>
                         <input type="text" id="studentNumber" placeholder="e.g., 2024000001" required />
-                        <small style="color:#7a8aa0; font-size:12px; margin-top:4px;">Exactly 10 digits (numbers only)</small>
+                        <small>Exactly 10 digits (numbers only)</small>
                     </div>
                 </div>
                 <div class="form-row">
@@ -126,7 +138,7 @@
                     <div class="group">
                         <label>Roll Number <span>*</span></label>
                         <input type="text" id="rollNumber" placeholder="e.g., 101" required />
-                        <small style="color:#7a8aa0; font-size:12px; margin-top:4px;">Unique roll number for the student</small>
+                        <small>Unique roll number for the student</small>
                     </div>
                 </div>
                 <div class="form-row">
@@ -144,7 +156,7 @@
             </form>
         </div>
 
-        <!-- ===== STUDENT TABLE ===== -->
+        <!-- Student Table -->
         <div class="tbl-wrap">
             <div class="tbl-head">
                 <h3><i class="fas fa-list"></i> All Students</h3>
@@ -167,7 +179,7 @@
             </div>
         </div>
 
-        <!-- ===== SEARCH STUDENT BY ROLL NUMBER ===== -->
+        <!-- Search Student by Roll Number -->
         <div class="search-roll-section">
             <h3><i class="fas fa-search"></i> Search Student by Roll Number</h3>
             <div class="search-roll-box">
@@ -179,11 +191,41 @@
             </div>
         </div>
 
-        <!-- ===== LAST ADDED STUDENT ===== -->
+        <!-- Last Added Student -->
         <div class="last-added" id="lastAdded">
             <i class="fas fa-user-check"></i>
             <span>Last added: <strong id="lastName">None yet</strong></span>
         </div>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>SMS</span>
+                    </div>
+                    <p class="footer-subtitle">Student Management System</p>
+                    <p class="footer-tagline">Manage • Track • Analyze</p>
+                    <p class="footer-version">Version 1.0</p>
+                </div>
+                <div class="footer-right">
+                    <div class="footer-social">
+                        <a href="https://github.com" target="_blank" class="social-link" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" class="social-link" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                            <span>LinkedIn</span>
+                        </a>
+                    </div>
+                    <p class="footer-copyright">
+                        &copy; 2026 Chirag Gupta. All Rights Reserved.
+                    </p>
+                </div>
+            </div>
+        </footer>
 
     </main>
 </div>
