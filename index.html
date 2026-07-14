@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Infrastructure - SMS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0b1e3a 0%, #1a3a6b 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .landing {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 40px;
+            padding: 50px 40px;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            animation: fadeUp 0.8s ease;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo {
+            font-size: 60px;
+            color: #4f8cff;
+            margin-bottom: 10px;
+        }
+
+        .landing h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .landing h1 span {
+            color: #4f8cff;
+        }
+
+        .landing .tagline {
+            font-size: 18px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 16px;
+            margin: 30px 0 35px;
+        }
+
+        .feature {
+            background: rgba(255,255,255,0.06);
+            padding: 16px 12px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: 0.3s;
+        }
+
+        .feature:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-4px);
+        }
+
+        .feature i {
+            font-size: 28px;
+            color: #4f8cff;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .feature span {
+            font-size: 14px;
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+        }
+
+        .btn-dashboard {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: #2563eb;
+            color: #fff;
+            padding: 16px 48px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 28px rgba(37,99,235,0.35);
+        }
+
+        .btn-dashboard:hover {
+            background: #1d4ed8;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 36px rgba(37,99,235,0.5);
+        }
+
+        .btn-dashboard i {
+            font-size: 20px;
+        }
+
+        .footer-note {
+            margin-top: 28px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.3);
+        }
+
+        .footer-note i {
+            margin: 0 4px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .landing {
+                padding: 30px 20px;
+            }
+            .landing h1 {
+                font-size: 32px;
+            }
+            .logo {
+                font-size: 44px;
+            }
+            .features {
+                grid-template-columns: 1fr 1fr;
+            }
+            .btn-dashboard {
+                padding: 14px 32px;
+                font-size: 16px;
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="landing">
+        <!-- Icon -->
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i>
+        </div>
+
+        <!-- Title -->
+        <h1>Student <span>Infrastructure</span></h1>
+        <p class="tagline">⚡ Complete Student Management System</p>
+
+        <!-- Features -->
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-user-graduate"></i>
+                <span>Manage Students</span>
+            </div>
+            <div class="feature">
+                <i class="fas fa-book-open"></i>
+                <span>Course Tracking</span>
+            </div>
+            <div class="feature">
+                <i class="fas fa-chart-line"></i>
+                <span>Grade Analysis</span>
+            </div>
+            <div class="feature">
+                <i class="fas fa-database"></i>
+                <span>Local Storage</span>
+            </div>
+        </div>
+
+        <!-- Dashboard Button -->
+        <a href="dashboard/index.html" class="btn-dashboard">
+            <i class="fas fa-th-large"></i> Go to Dashboard
+        </a>
+
+        <!-- Footer -->
+        <div class="footer-note">
+            <i class="fas fa-shield-alt"></i> Secure • <i class="fas fa-bolt"></i> Fast • <i class="fas fa-mobile-alt"></i> Responsive
+        </div>
+    </div>
+</body>
+</html>
