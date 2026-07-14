@@ -18,11 +18,29 @@ const App = {
             document.querySelector('.side').classList.toggle('open');
         };
         
-        // Back button
+        // Back button - sidebar close
         document.getElementById('backBtn').onclick = (e) => {
             e.preventDefault();
-            if (confirm('Go back to previous page?')) {
-                window.history.back();
+            document.querySelector('.side').classList.remove('open');
+        };
+
+        // Sidebar menu click - Active state
+        document.querySelectorAll('.side nav a').forEach(link => {
+            link.onclick = function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.side nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            };
+        });
+
+        // ===== SEARCH BY ROLL NUMBER =====
+        document.getElementById('rollSearchBtn').onclick = () => {
+            this.searchByRollNumber();
+        };
+
+        document.getElementById('rollSearchInput').onkeypress = (e) => {
+            if (e.key === 'Enter') {
+                this.searchByRollNumber();
             }
         };
     },
@@ -41,6 +59,10 @@ const App = {
         // Clear error styles
         document.getElementById('studentNumber').style.borderColor = '';
         document.getElementById('rollNumber').style.borderColor = '';
+        
+        // Clear roll search result
+        document.getElementById('rollSearchResult').innerHTML = '';
+        document.getElementById('rollSearchInput').value = '';
     },
 
     search(q) {
@@ -54,6 +76,75 @@ const App = {
         ) : data;
         UI.render(filtered);
         UI.stats(filtered);
+    },
+
+    // ===== SEARCH BY ROLL NUMBER =====
+    searchByRollNumber() {
+        const rollInput = document.getElementById('rollSearchInput');
+        const resultDiv = document.getElementById('rollSearchResult');
+        const rollNumber = rollInput.value.trim();
+
+        // Validation - empty input
+        if (!rollNumber) {
+            resultDiv.innerHTML = `
+                <div class="validation-msg">
+                    <i class="fas fa-exclamation-circle"></i> Please enter a roll number!
+                </div>
+            `;
+            return;
+        }
+
+        // Search in localStorage
+        const students = Storage.get();
+        const student = students.find(s => s.rollNumber === rollNumber);
+
+        if (student) {
+            // Student found - display result card
+            resultDiv.innerHTML = `
+                <div class="search-result">
+                    <div class="result-card">
+                        <div class="result-item">
+                            <span class="label">Full Name</span>
+                            <span class="value">${student.name}</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">Email</span>
+                            <span class="value">${student.email}</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">Student Number</span>
+                            <span class="value">${student.studentNumber}</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">Course</span>
+                            <span class="value">${student.course}</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">Roll Number</span>
+                            <span class="value">${student.rollNumber}</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">Grade</span>
+                            <span class="value">${student.grade}%</span>
+                        </div>
+                        <div class="result-item" style="grid-column: 1 / -1;">
+                            <span class="label">Status</span>
+                            <span class="value"><span class="tag ${student.status.toLowerCase()}">${student.status}</span></span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        } else {
+            // No student found
+            resultDiv.innerHTML = `
+                <div class="search-result">
+                    <div class="no-result">
+                        <i class="fas fa-user-slash"></i>
+                        ❌ No student found with Roll Number: <strong>${rollNumber}</strong>
+                    </div>
+                </div>
+            `;
+        }
     },
 
     save() {
